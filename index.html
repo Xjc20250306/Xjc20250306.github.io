@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="徐靖超 - 东北大学计算机科学与技术本科生个人主页">
-  <title>徐靖超 · 个人主页</title>
+  <title data-en="Jingchao Xu · Homepage">徐靖超 · 个人主页</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -13,14 +13,15 @@
 
   <header class="site-header">
     <nav class="nav container">
-      <a class="brand" href="index.html">徐靖超</a>
+      <a class="brand" href="index.html" data-en="Jingchao Xu">徐靖超</a>
       <ul class="nav-links">
-        <li><a href="index.html" class="active">首页</a></li>
-        <li><a href="research.html">科研</a></li>
-        <li><a href="awards.html">竞赛</a></li>
-        <li><a href="honors.html">荣誉</a></li>
+        <li><a href="index.html" class="active" data-en="Home">首页</a></li>
+        <li><a href="research.html" data-en="Research">科研</a></li>
+        <li><a href="awards.html" data-en="Awards">竞赛</a></li>
+        <li><a href="honors.html" data-en="Honors">荣誉</a></li>
       </ul>
-      <a class="btn-resume" href="assets/resume.pdf" target="_blank" rel="noopener">下载简历 PDF</a>
+      <button id="lang-toggle" class="btn-lang" type="button" aria-label="Switch to English">EN</button>
+      <a class="btn-resume" href="assets/resume.pdf" target="_blank" rel="noopener" data-en="Download CV">下载简历 PDF</a>
     </nav>
   </header>
 
@@ -30,13 +31,15 @@
     <section class="hero container">
       <img class="avatar" src="assets/avatar.jpg" alt="徐靖超" loading="eager">
       <div class="hero-info">
-        <h1>徐靖超</h1>
-        <p class="tagline">东北大学 · 计算机科学与技术 · 2023 级本科生</p>
+        <h1 data-en="Jingchao Xu">徐靖超</h1>
+        <p class="tagline" data-en="Northeastern University · Computer Science · Class of 2027">
+          东北大学 · 计算机科学与技术 · 2023 级本科生</p>
         <ul class="facts">
-          <li><strong>GPA：</strong>4.18 / 5.0</li>
-          <li><strong>专业排名：</strong>7 / 196（前 4%）</li>
-          <li><strong>研究兴趣：</strong>深度学习 / 多模态融合 / 情感计算 / 计算机视觉</li>
-          <li><strong>英语：</strong>CET-6 477</li>
+          <li data-en="<strong>GPA:</strong> 4.18 / 5.0"><strong>GPA：</strong>4.18 / 5.0</li>
+          <li data-en="<strong>Major Ranking:</strong> 7 / 196 (Top 4%)"><strong>专业排名：</strong>7 / 196（前 4%）</li>
+          <li data-en="<strong>Research Interests:</strong> Deep Learning / Multimodal Fusion / Affective Computing / Computer Vision">
+            <strong>研究兴趣：</strong>深度学习 / 多模态融合 / 情感计算 / 计算机视觉</li>
+          <li data-en="<strong>English:</strong> CET-6 477"><strong>英语：</strong>CET-6 477</li>
         </ul>
         <p class="hero-contact">
           <a href="mailto:xujingchao@mails.neu.edu.cn">xujingchao@mails.neu.edu.cn</a> ·
@@ -47,28 +50,33 @@
 
     <!-- 教育背景 -->
     <section class="container">
-      <h2>教育背景</h2>
+      <h2 data-en="Education">教育背景</h2>
       <article class="card">
         <div class="card-head">
-          <h3>东北大学　计算机科学与技术（本科）</h3>
-          <span class="period">2023.09 – 2027.06（预期）</span>
+          <h3 data-en="Northeastern University &nbsp;&nbsp; B.Eng. in Computer Science and Technology">
+            东北大学　计算机科学与技术（本科）</h3>
+          <span class="period" data-en="Sep 2023 – Jun 2027 (Expected)">2023.09 – 2027.06（预期）</span>
         </div>
         <ul class="bullets">
-          <li>GPA <strong>4.18 / 5.0</strong>，专业排名 <strong>7 / 196</strong>（前 4%）</li>
-          <li>核心课程：数据结构 (98)、计算机网络 (98)、操作系统 (94)、计算机组成原理 (90)、软件工程 (99)</li>
-          <li>英语：CET-4 510 / CET-6 477</li>
+          <li data-en="GPA <strong>4.18 / 5.0</strong>, Major Ranking <strong>7 / 196</strong> (Top 4%)">
+            GPA <strong>4.18 / 5.0</strong>，专业排名 <strong>7 / 196</strong>（前 4%）</li>
+          <li data-en="Core Courses: Data Structures (98), Computer Networks (98), Operating Systems (94), Computer Organization (90), Software Engineering (99)">
+            核心课程：数据结构 (98)、计算机网络 (98)、操作系统 (94)、计算机组成原理 (90)、软件工程 (99)</li>
+          <li data-en="English: CET-4 510 / CET-6 477">英语：CET-4 510 / CET-6 477</li>
         </ul>
       </article>
     </section>
 
     <!-- 联系方式 -->
     <section class="container">
-      <h2>联系方式</h2>
+      <h2 data-en="Contact">联系方式</h2>
       <ul class="contact-list">
-        <li>邮箱：<a href="mailto:xujingchao@mails.neu.edu.cn">xujingchao@mails.neu.edu.cn</a></li>
-        <li>GitHub：<a href="https://github.com/Xjc20250306" target="_blank" rel="noopener">github.com/Xjc20250306</a>
+        <li data-en="Email: <a href='mailto:xujingchao@mails.neu.edu.cn'>xujingchao@mails.neu.edu.cn</a>">
+          邮箱：<a href="mailto:xujingchao@mails.neu.edu.cn">xujingchao@mails.neu.edu.cn</a></li>
+        <li data-en="GitHub: <a href='https://github.com/Xjc20250306' target='_blank' rel='noopener'>github.com/Xjc20250306</a>">
+          GitHub：<a href="https://github.com/Xjc20250306" target="_blank" rel="noopener">github.com/Xjc20250306</a>
         </li>
-        <li>电话：155-0377-5801</li>
+        <li data-en="Phone: 155-0377-5801">电话：155-0377-5801</li>
       </ul>
     </section>
 
@@ -76,7 +84,7 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p>© 2026 徐靖超 · 最后更新 2026-04-15</p>
+      <p data-en="© 2026 Jingchao Xu · Last updated 2026-04-15">© 2026 徐靖超 · 最后更新 2026-04-15</p>
     </div>
   </footer>
 

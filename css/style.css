@@ -100,6 +100,26 @@ a:hover { color: var(--accent-2); text-decoration: underline; }
 }
 .nav-links a.active::after { transform: scaleX(1); }
 
+/* Lang toggle button */
+.btn-lang {
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--bg);
+  cursor: pointer;
+  margin-right: 10px;
+  transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.15s;
+}
+.btn-lang:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+.btn-lang:active { transform: translateY(1px); }
+
 /* Resume button */
 .btn-resume {
   position: relative;
