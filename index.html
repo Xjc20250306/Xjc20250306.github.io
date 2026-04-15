@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="计算机科学与技术专业本科生个人主页">
-  <title>个人主页</title>
+  <meta name="description" content="徐靖超 - 东北大学计算机科学与技术本科生个人主页">
+  <title>徐靖超 · 个人主页</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -13,24 +13,22 @@
 
   <header class="site-header">
     <nav class="nav container">
-      <a class="brand" href="#top">个人主页</a>
+      <a class="brand" href="index.html">徐靖超</a>
       <ul class="nav-links">
-        <li><a href="#edu">教育</a></li>
-        <li><a href="#research">科研</a></li>
-        <li><a href="#awards">竞赛</a></li>
-        <li><a href="#honors">荣誉</a></li>
-        <li><a href="#skills">技能</a></li>
-        <li><a href="#contact">联系</a></li>
+        <li><a href="index.html" class="active">首页</a></li>
+        <li><a href="research.html">科研</a></li>
+        <li><a href="awards.html">竞赛</a></li>
+        <li><a href="honors.html">荣誉</a></li>
       </ul>
       <a class="btn-resume" href="assets/resume.pdf" target="_blank" rel="noopener">下载简历 PDF</a>
     </nav>
   </header>
 
-  <main id="top">
+  <main>
 
     <!-- Hero -->
     <section class="hero container">
-      <img class="avatar" src="assets/avatar.jpg" alt="个人照片" loading="eager">
+      <img class="avatar" src="assets/avatar.jpg" alt="徐靖超" loading="eager">
       <div class="hero-info">
         <h1>徐靖超</h1>
         <p class="tagline">东北大学 · 计算机科学与技术 · 2023 级本科生</p>
@@ -48,7 +46,7 @@
     </section>
 
     <!-- 教育背景 -->
-    <section id="edu" class="container">
+    <section class="container">
       <h2>教育背景</h2>
       <article class="card">
         <div class="card-head">
@@ -63,130 +61,8 @@
       </article>
     </section>
 
-    <!-- 科研经历 -->
-    <section id="research" class="container">
-      <h2>科研经历</h2>
-
-      <article class="card">
-        <div class="card-head">
-          <h3>基于个体差异感知的 AI 多模态心理健康检测系统开发</h3>
-          <span class="period">2025.09-至今</span>
-        </div>
-        <p class="meta">东北大学 · 指导老师：傅昌锃</p>
-        <ul class="bullets">
-          <li>融合 EmoNet(面部)、wav2vec 2.0(语音)、EEG 8 频段功率分析及 rPPG(脉搏)四类感知通道，基于 PAD
-            三维情感空间，通过欧氏距离度量与跨模态加权融合，将多通道生理信号转化为自信力、身心平衡率等可量化心理健康指标，解决传统心理评估依赖主观量表的局限，系统检测准确率达 80%。</li>
-          <li>采用 Flask Blueprint 构建模块化 RESTful API，结合 MongoDB 与 JWT 认证，实现数据读取、融合计算与持久化的完整后端流水线。</li>
-        </ul>
-      </article>
-
-      <article class="card">
-        <div class="card-head">
-          <h3>基于知识蒸馏的语音情感识别模型压缩研究</h3>
-          <span class="period">2026.01-至今</span>
-        </div>
-        <p class="meta">东北大学 · 指导老师：傅昌锃</p>
-        <ul class="bullets">
-          <li>研究大型语音预训练模型(wav2vec2-large-robust)的知识蒸馏，设计 Pre-Post Hidden Alignment
-            方法，通过对齐教师模型微调前后隐层表示的变化方向，引导学生模型学习情感相关特征，将 12 层模型压缩至 6 层/3 层。</li>
-          <li>在 IEMOCAP 数据集上以 5 折交叉验证系统对比四种蒸馏策略(CCC-only / Output-KD / FitNets / PPHA)，分析不同 loss 设计对
-            Arousal/Dominance/Valence 三维情感的影响，揭示隐层幅度失衡对蒸馏信号的干扰机制</li>
-        </ul>
-      </article>
-
-      <article class="card">
-        <div class="card-head">
-          <h3>语音情感驱动数字人面部生成系统</h3>
-          <span class="period">2025.03-2025.08</span>
-        </div>
-        <p class="meta">东北大学 · 指导老师：傅昌锃</p>
-        <ul class="bullets">
-          <li>设计多模态特征融合框架，融合音频 Mel 频谱(BiLSTM 编码)、文本语义情感(DistilBERT)与视觉帧特征ResNet-18)，通过时序跨注意力机制(Temporal
-            Cross-Attention)实现音视频对齐，驱动数字人面部动画生成。</li>
-          <li>提出上下半脸解耦生成策略，设计独立的上半脸分支（眼部注意力模块 + 微表情控制器，覆盖眨眼、扬眉、目光变化）与下半脸分支（音频驱动口型生成），并结合 FiLM 调制层实现情感特征对生成过程的精细控制。</li>
-        </ul>
-      </article>
-
-      <h3 class="sub">论文 / 预印本</h3>
-      <ol class="pubs">
-        <li>
-          <strong>徐靖超</strong>, 待补充.
-          <em>Paper Title Goes Here.</em>
-          会议 / 期刊名, 2025.
-          [<a href="#" target="_blank" rel="noopener">PDF</a>] [<a href="#" target="_blank" rel="noopener">代码</a>]
-          <span class="tag">在投</span>
-        </li>
-      </ol>
-    </section>
-
-    <!-- 竞赛 -->
-    <section id="awards" class="container">
-      <h2>竞赛</h2>
-
-      <h3 class="sub">国家级</h3>
-      <ul class="awards">
-        <li><strong>全球大学生人工智能算法精英大赛</strong>　国家三等奖　<span class="period">2025</span></li>
-        <li><strong>“东方财富杯”全国大学生金融挑战赛</strong>　国家一等奖　<span class="period">2024</span></li>
-      </ul>
-
-      <h3 class="sub">省级</h3>
-      <ul class="awards">
-        <li><strong>全国大学生数学建模竞赛</strong>　省一等奖　<span class="period">2025</span></li>
-        <li><strong>全国大学生数学竞赛</strong>　省一等奖　<span class="period">2024</span></li>
-        <li><strong>亚太地区数学建模竞赛</strong>　一等奖　<span class="period">2024</span></li>
-        <li><strong>蓝桥杯软件赛</strong>　省三等奖　<span class="period">2024</span></li>
-        <li><strong>睿抗编程赛</strong>　省三等奖　<span class="period">2025</span></li>
-      </ul>
-
-      <!-- 证书轮播 -->
-      <div class="carousel">
-        <button class="carousel-btn prev" aria-label="上一张">&lsaquo;</button>
-        <div class="carousel-track">
-          <img src="assets/avatar.jpg" alt="竞赛证书 1（待替换）" loading="lazy">
-          <img src="assets/avatar.jpg" alt="竞赛证书 2（待替换）" loading="lazy">
-        </div>
-        <button class="carousel-btn next" aria-label="下一张">&rsaquo;</button>
-        <div class="carousel-dots"></div>
-      </div>
-    </section>
-
-    <!-- 荣誉 -->
-    <section id="honors" class="container">
-      <h2>荣誉</h2>
-      <ul class="awards">
-        <li><strong>国家奖学金</strong>　<span class="period">2024, 2025</span></li>
-        <li><strong>校三等奖学金</strong>　<span class="period">2024</span></li>
-        <li><strong>创新创业奖学金</strong>　<span class="period">2025</span></li>
-        <li><strong>三好学生</strong>　<span class="period">2024</span></li>
-        <li><strong>优秀学生干部</strong>　<span class="period">2025</span></li>
-        <li><strong>优秀团员</strong>　<span class="period">2024</span></li>
-        <li><strong>优秀团干部</strong>　<span class="period">2025</span></li>
-      </ul>
-
-      <!-- 证书轮播 -->
-      <div class="carousel">
-        <button class="carousel-btn prev" aria-label="上一张">&lsaquo;</button>
-        <div class="carousel-track">
-          <img src="assets/avatar.jpg" alt="荣誉证书 1（待替换）" loading="lazy">
-          <img src="assets/avatar.jpg" alt="荣誉证书 2（待替换）" loading="lazy">
-        </div>
-        <button class="carousel-btn next" aria-label="下一张">&rsaquo;</button>
-        <div class="carousel-dots"></div>
-      </div>
-    </section>
-
-    <!-- 技能 -->
-    <section id="skills" class="container">
-      <h2>技能</h2>
-      <ul class="skills-list">
-        <li><strong>编程语言：</strong>C/C++, Python, Java, JavaScript</li>
-        <li><strong>框架与工具：</strong>PyTorch, TensorFlow, Git, Linux, Docker</li>
-        <li><strong>研究工具：</strong>LaTeX, Matplotlib, Jupyter</li>
-      </ul>
-    </section>
-
     <!-- 联系方式 -->
-    <section id="contact" class="container">
+    <section class="container">
       <h2>联系方式</h2>
       <ul class="contact-list">
         <li>邮箱：<a href="mailto:xujingchao@mails.neu.edu.cn">xujingchao@mails.neu.edu.cn</a></li>
@@ -200,7 +76,7 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p>© 2026 个人主页 · 最后更新 2026-04-10</p>
+      <p>© 2026 徐靖超 · 最后更新 2026-04-15</p>
     </div>
   </footer>
 

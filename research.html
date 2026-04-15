@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="徐靖超 - 科研经历">
+  <title>科研经历 · 徐靖超</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="index.html">徐靖超</a>
+      <ul class="nav-links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="research.html" class="active">科研</a></li>
+        <li><a href="awards.html">竞赛</a></li>
+        <li><a href="honors.html">荣誉</a></li>
+      </ul>
+      <a class="btn-resume" href="assets/resume.pdf" target="_blank" rel="noopener">下载简历 PDF</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="container page-section">
+      <h2>科研经历</h2>
+
+      <article class="card">
+        <div class="card-head">
+          <h3>基于个体差异感知的 AI 多模态心理健康检测系统开发</h3>
+          <span class="period">2025.09 – 至今</span>
+        </div>
+        <p class="meta">东北大学 · 指导老师：傅昌锃</p>
+        <ul class="bullets">
+          <li>融合 EmoNet(面部)、wav2vec 2.0(语音)、EEG 8 频段功率分析及 rPPG(脉搏)四类感知通道，基于 PAD
+            三维情感空间，通过欧氏距离度量与跨模态加权融合，将多通道生理信号转化为自信力、身心平衡率等可量化心理健康指标，解决传统心理评估依赖主观量表的局限，系统检测准确率达 80%。</li>
+          <li>采用 Flask Blueprint 构建模块化 RESTful API，结合 MongoDB 与 JWT 认证，实现数据读取、融合计算与持久化的完整后端流水线。</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <h3>基于知识蒸馏的语音情感识别模型压缩研究</h3>
+          <span class="period">2026.01 – 至今</span>
+        </div>
+        <p class="meta">东北大学 · 指导老师：傅昌锃</p>
+        <ul class="bullets">
+          <li>研究大型语音预训练模型(wav2vec2-large-robust)的知识蒸馏，设计 Pre-Post Hidden Alignment
+            方法，通过对齐教师模型微调前后隐层表示的变化方向，引导学生模型学习情感相关特征，将 12 层模型压缩至 6 层/3 层。</li>
+          <li>在 IEMOCAP 数据集上以 5 折交叉验证系统对比四种蒸馏策略(CCC-only / Output-KD / FitNets / PPHA)，分析不同 loss 设计对
+            Arousal/Dominance/Valence 三维情感的影响，揭示隐层幅度失衡对蒸馏信号的干扰机制。</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <h3>语音情感驱动数字人面部生成系统</h3>
+          <span class="period">2025.03 – 2025.08</span>
+        </div>
+        <p class="meta">东北大学 · 指导老师：傅昌锃</p>
+        <ul class="bullets">
+          <li>设计多模态特征融合框架，融合音频 Mel 频谱(BiLSTM 编码)、文本语义情感(DistilBERT)与视觉帧特征(ResNet-18)，通过时序跨注意力机制(Temporal
+            Cross-Attention)实现音视频对齐，驱动数字人面部动画生成。</li>
+          <li>提出上下半脸解耦生成策略，设计独立的上半脸分支（眼部注意力模块 + 微表情控制器，覆盖眨眼、扬眉、目光变化）与下半脸分支（音频驱动口型生成），并结合 FiLM 调制层实现情感特征对生成过程的精细控制。</li>
+        </ul>
+      </article>
+
+      <h3 class="sub">论文 / 预印本</h3>
+      <ol class="pubs">
+        <li>
+          <strong>徐靖超</strong>, 待补充.
+          <em>Paper Title Goes Here.</em>
+          会议 / 期刊名, 2025.
+          [<a href="#" target="_blank" rel="noopener">PDF</a>] [<a href="#" target="_blank" rel="noopener">代码</a>]
+          <span class="tag">在投</span>
+        </li>
+      </ol>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 徐靖超 · 最后更新 2026-04-15</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+
+</html>
