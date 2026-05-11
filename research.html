@@ -51,26 +51,56 @@
             东北大学 · 指导老师：傅昌锃</p>
           <div class="tags-mini">
             <span class="tag-pill sm">PyTorch</span>
+            <span class="tag-pill sm">ONNX Runtime</span>
             <span class="tag-pill sm">EmoNet</span>
             <span class="tag-pill sm">wav2vec 2.0</span>
-            <span class="tag-pill sm">EEG</span>
+            <span class="tag-pill sm">EEG / rPPG</span>
+            <span class="tag-pill sm">PAD Space</span>
             <span class="tag-pill sm">Flask</span>
             <span class="tag-pill sm">MongoDB</span>
+            <span class="tag-pill sm">Qwen API</span>
           </div>
           <ul class="bullets">
             <li
-              data-en="Integrated four perception channels — EmoNet (facial), wav2vec 2.0 (speech), 8-band EEG power analysis, and rPPG (pulse) — within the PAD 3D affective space. Used Euclidean distance metrics and cross-modal weighted fusion to convert multi-channel physiological signals into quantifiable mental health indicators (e.g. self-confidence, mind-body balance), achieving 80% detection accuracy and overcoming the limits of subjective questionnaires.">
-              融合 EmoNet(面部)、wav2vec 2.0(语音)、EEG 8 频段功率分析及 rPPG(脉搏)四类感知通道，基于 PAD
-              三维情感空间，通过欧氏距离度量与跨模态加权融合，将多通道生理信号转化为自信力、身心平衡率等可量化心理健康指标，解决传统心理评估依赖主观量表的局限，系统检测准确率达 80%。</li>
+              data-en="<strong>Background:</strong> Traditional mental health assessment relies heavily on subjective scales (PHQ depression inventory, Big Five personality questionnaire, etc.), which suffer from low compliance, susceptibility to deliberate manipulation, and inability to capture fine-grained physiological states. This project builds a multimodal, automated mental health evaluation system centered on objective physiological signals, covering the full pipeline from data acquisition and feature extraction to indicator computation and report generation.">
+              <strong>项目背景：</strong>传统心理健康评估高度依赖 PHQ
+              抑郁量表、大五人格问卷等主观量表，存在被试配合度低、结果易受主观意愿干扰、难以捕捉细粒度生理状态等局限。本项目以客观生理信号为核心，构建多模态融合的心理健康自动化评测系统，实现从数据采集、特征提取、指标计算到报告生成的全流程闭环。
+            </li>
             <li
-              data-en="Built a modular RESTful API with Flask Blueprint, combined with MongoDB and JWT authentication, implementing a complete backend pipeline for data ingestion, fusion computation, and persistence.">
-              采用 Flask Blueprint 构建模块化 RESTful API，结合 MongoDB 与 JWT 认证，实现数据读取、融合计算与持久化的完整后端流水线。</li>
+              data-en="<strong>System Architecture:</strong> Three-layer design — frontend acquisition, backend processing, and data persistence. The backend uses Flask Blueprint to build a modular RESTful API, decomposed into independent blueprints for user management, data acquisition, analysis computation, and toolbox. JWT handles stateless authentication; MongoDB persists multimodal data and analysis results. Evaluation proceeds in four phases (video watching, self-introduction, reading task 1, reading task 2), each simultaneously collecting video and EEG data, with three signal streams processed and stored asynchronously in parallel.">
+              <strong>系统架构：</strong>分为前端采集层、后端处理层与数据持久层三部分。后端基于 Flask Blueprint 构建模块化 RESTful
+              API，按功能拆分为用户管理、数据采集、分析计算、工具箱等独立蓝图模块，JWT 实现无状态鉴权，MongoDB
+              负责多模态数据与分析结果的持久化存储。评测流程分为视频观看、自我介绍、阅读任务一、阅读任务二四个阶段，每阶段同步采集视频与 EEG 数据，三路信号异步并行处理与入库。
+            </li>
+            <li
+              data-en="<strong>Multimodal Signal Processing:</strong> Four physiological channels are fused: (1) <em>Facial expression</em> — EmoNet (Stacked HourGlass alignment + emotion head) extracts per-second facial Valence/Arousal; (2) <em>Speech emotion</em> — wav2vec 2.0-based ONNX model extracts per-second PAD (Pleasure-Arousal-Dominance) vectors; (3) <em>EEG</em> — NeuroSky MindWave captures δ/θ/α/β/γ band power spectra; sliding-window normalization yields attention, meditation, alertness, and wakefulness indicators; (4) <em>rPPG pulse</em> — green-channel ROI signals from video frames are extracted via FFT spectral analysis to estimate heart rate, SpO₂, and respiration rate; heart rate variability is classified according to TCM pulse theory (slow/rapid/deep/floating pulse types).">
+              <strong>多模态信号处理：</strong>融合四类生理信号——（1）<em>面部表情</em>：EmoNet（Stacked HourGlass 人脸对齐 + 情感识别头）逐秒提取面部
+              Valence/Arousal；（2）<em>语音情感</em>：基于 wav2vec 2.0 的 ONNX 模型逐秒提取语音 PAD 三维情感向量；（3）<em>EEG 脑电</em>：接入 NeuroSky
+              MindWave 采集 δ/θ/α/β/γ 频段功率谱，经滑动窗口归一化后计算注意力、冥想度、警觉度、清醒度等指标；（4）<em>rPPG 脉搏</em>：从视频帧 ROI 绿色通道提取光体积描记信号，结合
+              FFT 频谱分析估算心率、血氧与呼吸频率，并参照中医脉象理论（迟脉、数脉、沉脉、浮脉等）对心率变异性进行分类描述。
+            </li>
+            <li
+              data-en="<strong>Indicator Fusion:</strong> All modality features are unified in the PAD (Pleasure-Arousal-Dominance) affective space. Euclidean distances between current affective coordinates and preset emotion prototypes (anxiety, relaxation, hostility, stress, etc.) are computed, then combined via cross-modal weighted fusion to produce 20+ mental health indicators across three dimensions: <em>Positive affect</em> (self-confidence, mind-body balance, self-regulation, energy, vitality); <em>Negative affect</em> (aggressiveness, tension, facial stress, suspicion index); <em>Physiological parameters</em> (attention, relaxation, fatigue, anxiety, stress, depression, happiness, wakefulness). Standardized scale data (PHQ, Big Five, GWB) are used for supplementary validation, and Big Five personality traits (Extraversion, Agreeableness, Conscientiousness, Neuroticism, Openness) are objectively estimated.">
+              <strong>指标计算与融合：</strong>所有模态特征统一映射至 PAD 情感空间，计算当前情感坐标与预设情感原型（焦虑、放松、敌意、压力等）之间的欧氏距离，结合跨模态加权融合，输出涵盖三个维度的 20
+              余项心理健康指标：<em>正面情绪</em>（自信力、身心平衡率、自我调节能力、能量、活力）、<em>负面情绪</em>（攻击性、紧张度、表情压力、可疑度）、<em>生理参数</em>（注意力、放松度、疲劳/焦虑/压力/抑郁指数、幸福感、清醒度等）。结合
+              PHQ、大五人格、GWB 等标准化量表数据进行补充校验，并基于大五人格模型给出外向性、宜人性、尽责性、神经质、开放性的客观估计。
+            </li>
+            <li
+              data-en="<strong>AI Report Generation:</strong> Upon completion of all indicator computations, the system invokes the Qwen large language model with structured data as context to generate a personalized mental health analysis report in HTML format. The report covers four sections: positive affect interpretation, negative affect interpretation, physiological parameter analysis, and adjustment recommendations, with horizontal comparison against historical averages.">
+              <strong>AI 报告生成：</strong>所有指标计算完成后，以结构化数据为上下文调用 Qwen 大语言模型，生成个性化心理健康分析报告（HTML
+              格式），包含正面情绪解读、负面情绪解读、生理参数分析与调整建议四个板块，并与历史均值进行横向比较。
+            </li>
+            <li
+              data-en="<strong>Personal Contribution:</strong> Responsible for the design and development of the core analysis module: aggregating multimodal data (facial, speech, EEG, pulse) from MongoDB across all evaluation phases; implementing Euclidean distance metrics and cross-modal weighted fusion in the PAD affective space; computing 20+ mental health indicators (self-confidence, mind-body balance, anxiety index, depression index, etc.) and deriving Big Five personality traits; invoking the Qwen API to transform structured indicators into personalized HTML reports; persisting all analysis results to the database; and developing and testing the corresponding API routes.">
+              <strong>个人贡献：</strong>负责系统核心分析模块的设计与开发：从 MongoDB 聚合各阶段面部、语音、EEG、脉搏四类多模态数据；基于 PAD
+              情感空间实现欧氏距离度量与跨模态加权融合；完成自信力、身心平衡率、焦虑指数、抑郁指数等 20 余项心理健康指标的计算逻辑，并基于大五人格模型推导外向性、宜人性等人格特征；调用 Qwen API
+              将结构化指标转化为个性化 HTML 分析报告；将全部分析结果持久化写回数据库，完成相关 API 路由的开发与接口测试。
+            </li>
           </ul>
           <figure class="card-figure">
             <img src="assets/research/心理健康检测系统架构图.png" alt="多模态心理健康检测系统架构图" loading="lazy"
               onerror="this.src='assets/avatar.jpg';this.classList.add('placeholder');">
-            <figcaption data-en="System architecture (placeholder, replace with your figure)">系统架构图
-            </figcaption>
+            <figcaption data-en="System architecture diagram">系统架构图</figcaption>
           </figure>
         </article>
 
@@ -84,25 +114,56 @@
             东北大学 · 指导老师：傅昌锃</p>
           <div class="tags-mini">
             <span class="tag-pill sm">Knowledge Distillation</span>
+            <span class="tag-pill sm">PPHA</span>
             <span class="tag-pill sm">wav2vec2-large-robust</span>
+            <span class="tag-pill sm">MSP-Podcast</span>
             <span class="tag-pill sm">IEMOCAP</span>
+            <span class="tag-pill sm">CCC Loss</span>
+            <span class="tag-pill sm">Optuna</span>
             <span class="tag-pill sm">PyTorch</span>
           </div>
           <ul class="bullets">
             <li
-              data-en="Studied knowledge distillation of large speech pretrained models (wav2vec2-large-robust). Designed Pre-Post Hidden Alignment (PPHA), aligning the change directions of teacher hidden representations before and after fine-tuning to guide the student toward emotion-relevant features, compressing 12-layer models to 6/3 layers.">
-              研究大型语音预训练模型(wav2vec2-large-robust)的知识蒸馏，设计 Pre-Post Hidden Alignment
-              方法，通过对齐教师模型微调前后隐层表示的变化方向，引导学生模型学习情感相关特征，将 12 层模型压缩至 6 层/3 层。</li>
+              data-en="<strong>Background:</strong> Speech Emotion Recognition (SER) predicts continuous affective dimensions (Arousal / Valence / Dominance) from speech. Self-supervised models such as wav2vec 2.0 achieve state-of-the-art results but are prohibitively large (wav2vec2-large: 330M parameters) for resource-constrained deployment. Existing distillation methods only align the teacher's post-fine-tuning activations, ignoring the systematic hidden-state shift induced by fine-tuning — a shift that directly encodes task-relevant information.">
+              <strong>研究背景：</strong>语音情感识别（SER）旨在从语音信号中预测连续情感维度（Arousal / Valence / Dominance）。以 wav2vec 2.0
+              为代表的自监督预训练模型在 SER 任务上表现突出，但参数量庞大（wav2vec2-large 达
+              330M），难以在资源受限场景部署。现有蒸馏方法仅对齐教师微调后的绝对激活值，忽略了微调过程中隐层表示发生的系统性适应偏移——而该偏移本身正是任务相关信息的重要载体。
+            </li>
             <li
-              data-en="Conducted 5-fold cross-validation on IEMOCAP comparing four distillation strategies (CCC-only / Output-KD / FitNets / PPHA), analyzing how different loss designs affect Arousal/Dominance/Valence dimensions and revealing how hidden-magnitude imbalance interferes with distillation signals.">
-              在 IEMOCAP 数据集上以 5 折交叉验证系统对比四种蒸馏策略(CCC-only / Output-KD / FitNets / PPHA)，分析不同 loss 设计对
-              Arousal/Dominance/Valence 三维情感的影响，揭示隐层幅度失衡对蒸馏信号的干扰机制。</li>
+              data-en="<strong>PPHA Method:</strong> Proposed Pre-Post Hidden Alignment (PPHA): taking the teacher's hidden adaptation shift (pre-training → fine-tuning) as the distillation target rather than the post-fine-tuning absolute states. Teacher and student each maintain a frozen reference (pre-fine-tuning) checkpoint; temperature-scaled softmax log-differences of their hidden representations are aligned via MSE loss. All models stem from the same wav2vec2-large-robust checkpoint (24 layers): teacher = first 12 layers (165M), student L6 = first 6 layers (83M), student L3 = first 3 layers (42M). Optimal teacher layers {4, 7, 11, 12} for alignment were selected via Optuna TPE over 100 trials.">
+              <strong>PPHA 方法：</strong>提出 Pre-Post Hidden
+              Alignment（PPHA）蒸馏框架，以教师模型从预训练态到微调态的隐层适应偏移作为蒸馏目标，而非微调后的绝对隐层状态。教师与学生各自保留一个冻结的预训练参考检查点，对微调前后的隐层表示分别进行温度缩放
+              softmax 映射并取对数差分，再以 MSE 对齐两者。所有模型均从同一 wav2vec2-large-robust 预训练检查点出发：教师取前 12 层（165M），学生 L6 取前 6 层（83M），学生
+              L3 取前 3 层（42M）。参与对齐的教师层 {4, 7, 11, 12} 经 Optuna TPE 100 次试验搜索确定。
+            </li>
+            <li
+              data-en="<strong>Auxiliary Techniques:</strong> (1) Slope Regularization — CCC optimization tends to converge to near-constant predictions (slope → 0), producing spurious high correlation. A sin²-penalty on the angular deviation of the predicted slope from 45° is multiplicatively appended to the CCC loss, effectively preventing conservative predictions (especially critical for the Valence dimension). (2) Uncertainty-Weighted Loss (UWL) — learnable log-variance parameters automatically balance the PPHA alignment loss against the CCC loss, eliminating manual tuning.">
+              <strong>辅助技术：</strong>（1）<em>斜率正则化</em>——CCC 优化易收敛至近常数预测（斜率趋近 0），产生虚假高相关；通过对预测斜率偏离 45° 的角度施加 sin²
+              惩罚项并以乘法形式附加到 CCC 损失上，有效防止保守预测，对效价（Valence）维度尤为重要。（2）<em>不确定性加权损失（UWL）</em>——引入可学习 log 方差参数，自动平衡 PPHA 对齐损失与
+              CCC 损失的比例，无需手动调参。
+            </li>
+            <li
+              data-en="<strong>Experiments:</strong> Evaluated on MSP-Podcast v1.10 (63,076 training samples; Test1: 16,903 samples same retrieval protocol; Test2: 13,289 samples from independent podcasts) and IEMOCAP (10,039 utterances, 5-fold LOSO cross-validation). Conducted cross-corpus evaluation in both directions to assess generalization. Systematically ablated 5 loss combinations (P / P+S / P+U / A+S+U / P+S+U) across 3 student sizes (L3/L6/L12), with A+S+U as the FitNets-style baseline.">
+              <strong>实验设置：</strong>在 MSP-Podcast v1.10（训练集 63,076 条；Test1 16,903 条与训练集同检索协议；Test2 13,289 条来自完全独立播客）和
+              IEMOCAP（10,039 条语音，5折留一会话交叉验证）上进行评估，并开展双向跨语料库泛化测试。系统消融 5 种损失组合（P / P+S / P+U / A+S+U / P+S+U）× 3
+              种学生规模（L3/L6/L12），以 A+S+U（FitNets 式直接对齐）为基线对照。
+            </li>
+            <li
+              data-en="<strong>Key Results:</strong> L12 student surpasses teacher on both MSP (CCC .487 vs .464) and IEMOCAP (.632 vs .606) at identical capacity, demonstrating the gain stems from the training framework itself. L6 retains 86–96% of teacher performance; L3 retains 84–93%. PPHA outperforms FitNets baseline on IEMOCAP (.632 vs .612) and MSP Test1/Test2 (.559/.415 vs .543/.398), with consistent advantage in cross-corpus transfer in both directions.">
+              <strong>主要结果：</strong>同容量条件下（L12 学生 vs 教师），学生在 MSP（CCC .487 vs .464）和 IEMOCAP（.632 vs
+              .606）上均超越教师，证明性能提升源于训练框架本身。L6 保留教师性能的 86–96%，L3 保留 84–93%。PPHA 在 IEMOCAP（.632 vs .612）和 MSP
+              Test1/Test2（.559/.415 vs .543/.398）上均优于 FitNets 基线，跨语料库迁移方向上亦保持一致优势。
+            </li>
+            <li
+              data-en="<strong>Personal Contribution:</strong> Solely responsible for the full IEMOCAP experimental pipeline: data preprocessing (audio conversion, label parsing, 5-fold split), implementation of the distillation training framework (PPHA loss, PKL pre-computation, gradient accumulation and other engineering optimizations), ablation study design and result analysis, and cross-corpus generalization evaluation.">
+              <strong>本人贡献：</strong>独立负责 IEMOCAP 数据集实验全流程：数据预处理（音频转换、标签解析、5折划分）、蒸馏训练框架代码实现（含 PPHA 损失、PKL
+              预计算、梯度累积等工程优化）、消融实验设计与结果分析，以及跨语料库泛化评估。
+            </li>
           </ul>
           <figure class="card-figure">
             <img src="assets/research/知识蒸馏框架图.png" alt="知识蒸馏框架图" loading="lazy"
               onerror="this.src='assets/avatar.jpg';this.classList.add('placeholder');">
-            <figcaption data-en="Distillation strategy comparison (placeholder, replace with your figure)">
-              知识蒸馏框架图</figcaption>
+            <figcaption data-en="PPHA distillation framework">知识蒸馏框架图</figcaption>
           </figure>
         </article>
 
@@ -114,41 +175,55 @@
           <p class="meta" data-en="Northeastern University · Advisor: Prof. Changzeng Fu">
             东北大学 · 指导老师：傅昌锃</p>
           <div class="tags-mini">
+            <span class="tag-pill sm">Wav2Lip</span>
+            <span class="tag-pill sm">ResNet-18</span>
             <span class="tag-pill sm">BiLSTM</span>
             <span class="tag-pill sm">DistilBERT</span>
-            <span class="tag-pill sm">ResNet-18</span>
             <span class="tag-pill sm">Cross-Attention</span>
             <span class="tag-pill sm">FiLM</span>
+            <span class="tag-pill sm">3D PatchGAN</span>
+            <span class="tag-pill sm">LPIPS</span>
           </div>
           <ul class="bullets">
-            <li
-              data-en="Designed a multimodal feature fusion framework integrating audio Mel-spectrograms (BiLSTM encoding), textual sentiment (DistilBERT), and visual frame features (ResNet-18). Used Temporal Cross-Attention for audio-visual alignment to drive digital human facial animation.">
-              设计多模态特征融合框架，融合音频 Mel 频谱(BiLSTM 编码)、文本语义情感(DistilBERT)与视觉帧特征(ResNet-18)，通过时序跨注意力机制(Temporal
-              Cross-Attention)实现音视频对齐，驱动数字人面部动画生成。</li>
-            <li
-              data-en="Proposed an upper-/lower-face decoupled generation strategy: an upper-face branch (eye-attention module + micro-expression controller covering blinks, brow raises, gaze) and a lower-face branch (audio-driven lip-sync), combined with FiLM modulation layers for fine-grained emotional control.">
-              提出上下半脸解耦生成策略，设计独立的上半脸分支（眼部注意力模块 + 微表情控制器，覆盖眨眼、扬眉、目光变化）与下半脸分支（音频驱动口型生成），并结合 FiLM 调制层实现情感特征对生成过程的精细控制。</li>
+            <li data-en="<strong>Background:</strong> Wav2Lip is the dominant audio-driven talking-face synthesis solution, but its core limitation is that only lip movement is driven — the rest of the face (expressions, gaze, brows) remains completely static, making the output look mechanical and unconvincing. This project targets precisely this gap: while preserving audio-driven lip sync, it introduces expression generation so that a digital human's face exhibits natural emotional variation during speech. As development progressed, eye details (blink rhythm, gaze direction) and brow movement proved equally critical to perceived realism, prompting dedicated modeling of these regions.">
+              <strong>项目背景：</strong>Wav2Lip 是目前主流的音频驱动说话人脸生成方案，但其核心局限在于只能驱动嘴唇运动，面部其余区域（表情、眼神、眉毛等）完全静止，生成结果显得机械、缺乏真实感。本项目针对这一局限：在保留音频驱动唇形同步的基础上引入表情生成能力，使数字人面部在说话时能呈现自然的情感变化；随着开发推进，眼部细节（眨眼节律、眼神方向）和眉毛运动对真实感同样关键，因此逐步扩展了对这些区域的专项建模。</li>
+            <li data-en="<strong>Architecture — Decoupled Upper/Lower Face:</strong> The face generation task is decomposed into two independent branches — upper face (eyes, brows) and lower face (lips) — driven by different modality signals and merged via a learnable fusion mask. Key modules: (1) <em>Full-face encoder</em>: ResNet-18 backbone with gradient checkpointing extracts multi-scale visual features from the reference frame; (2) <em>Audio encoder</em>: three-stream parallel multi-scale Conv1d + BiLSTM models per-frame audio; (3) <em>Text emotion encoder</em>: DistilBERT extracts sentence-level affective features to drive expression; (4) <em>Lower-face branch</em>: audio-primary, temporal cross-attention with time-delay bias for audio-visual alignment, FiLM conditional modulation for lip animation; (5) <em>Upper-face branch</em>: fuses audio and text emotion features to predict micro-expression parameters (blink probability, brow raise, gaze direction) with landmark heatmap attention for eye detail enhancement; (6) <em>Dynamic fusion</em>: convolutional network predicts per-pixel soft weights from 68-point landmark heatmaps to smoothly merge both branches.">
+              <strong>架构——上下半脸解耦：</strong>将人脸生成分解为<em>上半脸（眼部/眉毛）</em>与<em>下半脸（嘴唇）</em>两条独立分支，分别由不同模态信号驱动，再通过可学习融合掩码合并。主要模块：（1）<em>全脸编码器</em>：ResNet-18 backbone + gradient checkpointing 提取参考帧多尺度视觉特征；（2）<em>音频编码器</em>：三路并行多尺度 Conv1d + 双向 LSTM 建模逐帧音频；（3）<em>文本情感编码器</em>：DistilBERT 提取句子级情感特征驱动表情；（4）<em>下半脸分支</em>：以音频为主驱动，带时延偏置的时序交叉注意力对齐音视频，FiLM 条件调制生成唇部动画；（5）<em>上半脸分支</em>：融合音频与文本情感特征，预测微表情参数（眨眼概率、挑眉程度、视线方向），关键点热图注意力增强眼部细节；（6）<em>动态融合</em>：卷积网络基于 68 点关键点热图预测逐像素软融合权重，平滑合并上下半脸。</li>
+            <li data-en="<strong>Training Strategy &amp; Losses:</strong> Curriculum learning in four stages: freeze upper branch → train lips only; freeze lower branch → train eyes/brows only; unfreeze all for joint optimization; finally introduce adversarial training. Discriminators: 3D temporal PatchGAN (global temporal consistency) + eye-region local PatchGAN (eye detail realism). Loss terms: pixel L1, LPIPS perceptual loss, identity consistency, skin-tone loss, micro-expression smoothness, gaze coherence; a dynamic weight scheduler balances all terms throughout training.">
+              <strong>训练策略与损失：</strong>分阶段课程学习：冻结上半脸专训唇部 → 冻结下半脸专训眼眉 → 全部解冻整体优化 → 引入对抗训练。判别器：3D 时序 PatchGAN（整体时序一致性）+ 眼部局部 PatchGAN（眼部细节真实感）。损失体系涵盖像素 L1、LPIPS 感知损失、身份一致性、肤色损失、微表情平滑、视线连贯性等，并设计动态权重调度器平衡各分项。</li>
+            <li data-en="<strong>Limitations &amp; Outcome:</strong> The project did not reach the intended generation quality due to three constraints: (1) <em>Compute</em> — single consumer-grade GPU, batch size 1; the full training plan (1000 epochs including adversarial stage) could not be completed; training was halted at epoch 124; (2) <em>Data</em> — limited scale and uneven quality; landmark detection noise under profile views and occlusion degraded training stability for both branches; (3) <em>Complexity vs. trainability trade-off</em> — the multi-module design required more data and compute than available; greater model complexity raised the bar for training convergence rather than lowering it.">
+              <strong>局限与结果：</strong>项目最终未达预期生成质量，受三点制约：（1）<em>算力不足</em>——单卡消费级 GPU、批次大小仅为 1，完整训练计划（1000 epoch 含对抗阶段）无法跑完，实际训练至第 124 epoch 终止；（2）<em>数据有限</em>——规模小、质量参差，侧脸和遮挡场景下关键点检测噪声大，直接影响两路分支的训练稳定性；（3）<em>复杂度与可训练性的矛盾</em>——多子模块设计对数据量和训练充分性要求更高，在当前条件下反而带来训练困难。</li>
+            <li data-en="<strong>Takeaways:</strong> Completed the full cycle from design to implementation of a multimodal generation system; gained firsthand experience with audio-visual alignment, generative model training instability, and GPU memory optimization. Developed a clearer understanding of the technical boundaries of Wav2Lip-style approaches and the genuine difficulty of adding expression generation. Recognized that under resource constraints, model design requires more deliberate trade-offs between complexity and trainability.">
+              <strong>收获：</strong>完整走过多模态生成系统从设计到实现的全流程，对音视频对齐、生成模型训练不稳定性、显存优化等问题有了切身认识；对 Wav2Lip 等主流方案的技术边界有了更清晰的判断；认识到资源受限条件下模型设计需在复杂度与可训练性之间做更审慎的权衡。</li>
           </ul>
           <figure class="card-figure">
             <img src="assets/research/数字人.png" alt="数字人面部生成系统效果图" loading="lazy"
               onerror="this.src='assets/avatar.jpg';this.classList.add('placeholder');">
-            <figcaption data-en="Generation pipeline & demo (placeholder, replace with your figure)">面部识别图
+            <figcaption data-en="Generation pipeline diagram">面部生成系统架构图
             </figcaption>
           </figure>
         </article>
 
       </div><!-- /.timeline -->
 
-      <!-- <h3 class="sub" data-en="Publications / Preprints">论文 / 预印本</h3>
+      <h3 class="sub" data-en="Research Output">科研产出</h3>
       <ol class="pubs">
-        <li data-en="<strong>Jingchao Xu</strong>, et al. <em>Paper Title Goes Here.</em> Conference / Journal, 2025. [<a href='#' target='_blank' rel='noopener'>PDF</a>] [<a href='#' target='_blank' rel='noopener'>Code</a>] <span class='tag'>Under Review</span>">
-          <strong>徐靖超</strong>, 待补充.
-          <em>Paper Title Goes Here.</em>
-          会议 / 期刊名, 2025.
-          [<a href="#" target="_blank" rel="noopener">PDF</a>] [<a href="#" target="_blank" rel="noopener">代码</a>]
+        <li
+          data-en="Jiacheng Dong, <strong>Jingchao Xu</strong>, Shiqi Zhao, Changzeng Fu. &ldquo;PPHA: Pre-Post Hidden Alignment for Knowledge Distillation in Speech Emotion Recognition.&rdquo; <span class='tag'>Under Review</span> &nbsp; 2nd Author &nbsp; Paper">
+          Jiacheng Dong, <strong>Jingchao Xu</strong>, Shiqi Zhao, Changzeng Fu.
+          &ldquo;PPHA: Pre-Post Hidden Alignment for Knowledge Distillation in Speech Emotion Recognition.&rdquo;
           <span class="tag">在投</span>
+          <span class="role-tag" style="font-size:.78rem;padding:1px 7px;">第二作者</span>
+          <span class="role-tag" style="font-size:.78rem;padding:1px 7px;">论文</span>
         </li>
-      </ol> -->
+        <li
+          data-en="&ldquo;A Multimodal Depression Recognition Method Based on Personalized Embedding.&rdquo; Invention Patent. <span class='tag'>Filed</span> &nbsp; 2nd Inventor &nbsp; Patent">
+          &ldquo;一种基于个性化嵌入的多模态抑郁识别方法&rdquo;
+          <span class="tag">已受理</span>
+          <span class="role-tag" style="font-size:.78rem;padding:1px 7px;">学生第二发明人</span>
+          <span class="role-tag" style="font-size:.78rem;padding:1px 7px;">发明专利</span>
+        </li>
+      </ol>
     </section>
 
   </main>
