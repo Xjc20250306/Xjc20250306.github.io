@@ -783,6 +783,28 @@ main section h2::after { left: 42px; width: calc(100% - 42px); }
 }
 
 /* ============ Card Figure (research project image) ============ */
+/* 科研卡片滚动正文区 */
+.card-scroll-body {
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 6px;
+  margin-top: 10px;
+}
+.card-scroll-body::-webkit-scrollbar {
+  width: 4px;
+}
+.card-scroll-body::-webkit-scrollbar-track {
+  background: var(--bg-soft);
+  border-radius: 4px;
+}
+.card-scroll-body::-webkit-scrollbar-thumb {
+  background: var(--accent-light);
+  border-radius: 4px;
+}
+.card-scroll-body::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-2);
+}
+
 .card-figure {
   margin: 16px 0 4px;
   padding: 12px;

@@ -60,6 +60,7 @@
             <span class="tag-pill sm">MongoDB</span>
             <span class="tag-pill sm">Qwen API</span>
           </div>
+          <div class="card-scroll-body">
           <ul class="bullets">
             <li
               data-en="<strong>Background:</strong> Traditional mental health assessment relies heavily on subjective scales (PHQ depression inventory, Big Five personality questionnaire, etc.), which suffer from low compliance, susceptibility to deliberate manipulation, and inability to capture fine-grained physiological states. This project builds a multimodal, automated mental health evaluation system centered on objective physiological signals, covering the full pipeline from data acquisition and feature extraction to indicator computation and report generation.">
@@ -102,6 +103,7 @@
               onerror="this.src='assets/avatar.jpg';this.classList.add('placeholder');">
             <figcaption data-en="System architecture diagram">系统架构图</figcaption>
           </figure>
+          </div><!-- /.card-scroll-body -->
         </article>
 
         <article class="card timeline-item reveal">
@@ -122,6 +124,7 @@
             <span class="tag-pill sm">Optuna</span>
             <span class="tag-pill sm">PyTorch</span>
           </div>
+          <div class="card-scroll-body">
           <ul class="bullets">
             <li
               data-en="<strong>Background:</strong> Speech Emotion Recognition (SER) predicts continuous affective dimensions (Arousal / Valence / Dominance) from speech. Self-supervised models such as wav2vec 2.0 achieve state-of-the-art results but are prohibitively large (wav2vec2-large: 330M parameters) for resource-constrained deployment. Existing distillation methods only align the teacher's post-fine-tuning activations, ignoring the systematic hidden-state shift induced by fine-tuning — a shift that directly encodes task-relevant information.">
@@ -165,6 +168,7 @@
               onerror="this.src='assets/avatar.jpg';this.classList.add('placeholder');">
             <figcaption data-en="PPHA distillation framework">知识蒸馏框架图</figcaption>
           </figure>
+          </div><!-- /.card-scroll-body -->
         </article>
 
         <article class="card timeline-item reveal">
@@ -184,24 +188,45 @@
             <span class="tag-pill sm">3D PatchGAN</span>
             <span class="tag-pill sm">LPIPS</span>
           </div>
+          <div class="card-scroll-body">
           <ul class="bullets">
-            <li data-en="<strong>Background:</strong> Wav2Lip is the dominant audio-driven talking-face synthesis solution, but its core limitation is that only lip movement is driven — the rest of the face (expressions, gaze, brows) remains completely static, making the output look mechanical and unconvincing. This project targets precisely this gap: while preserving audio-driven lip sync, it introduces expression generation so that a digital human's face exhibits natural emotional variation during speech. As development progressed, eye details (blink rhythm, gaze direction) and brow movement proved equally critical to perceived realism, prompting dedicated modeling of these regions.">
-              <strong>项目背景：</strong>Wav2Lip 是目前主流的音频驱动说话人脸生成方案，但其核心局限在于只能驱动嘴唇运动，面部其余区域（表情、眼神、眉毛等）完全静止，生成结果显得机械、缺乏真实感。本项目针对这一局限：在保留音频驱动唇形同步的基础上引入表情生成能力，使数字人面部在说话时能呈现自然的情感变化；随着开发推进，眼部细节（眨眼节律、眼神方向）和眉毛运动对真实感同样关键，因此逐步扩展了对这些区域的专项建模。</li>
-            <li data-en="<strong>Architecture — Decoupled Upper/Lower Face:</strong> The face generation task is decomposed into two independent branches — upper face (eyes, brows) and lower face (lips) — driven by different modality signals and merged via a learnable fusion mask. Key modules: (1) <em>Full-face encoder</em>: ResNet-18 backbone with gradient checkpointing extracts multi-scale visual features from the reference frame; (2) <em>Audio encoder</em>: three-stream parallel multi-scale Conv1d + BiLSTM models per-frame audio; (3) <em>Text emotion encoder</em>: DistilBERT extracts sentence-level affective features to drive expression; (4) <em>Lower-face branch</em>: audio-primary, temporal cross-attention with time-delay bias for audio-visual alignment, FiLM conditional modulation for lip animation; (5) <em>Upper-face branch</em>: fuses audio and text emotion features to predict micro-expression parameters (blink probability, brow raise, gaze direction) with landmark heatmap attention for eye detail enhancement; (6) <em>Dynamic fusion</em>: convolutional network predicts per-pixel soft weights from 68-point landmark heatmaps to smoothly merge both branches.">
-              <strong>架构——上下半脸解耦：</strong>将人脸生成分解为<em>上半脸（眼部/眉毛）</em>与<em>下半脸（嘴唇）</em>两条独立分支，分别由不同模态信号驱动，再通过可学习融合掩码合并。主要模块：（1）<em>全脸编码器</em>：ResNet-18 backbone + gradient checkpointing 提取参考帧多尺度视觉特征；（2）<em>音频编码器</em>：三路并行多尺度 Conv1d + 双向 LSTM 建模逐帧音频；（3）<em>文本情感编码器</em>：DistilBERT 提取句子级情感特征驱动表情；（4）<em>下半脸分支</em>：以音频为主驱动，带时延偏置的时序交叉注意力对齐音视频，FiLM 条件调制生成唇部动画；（5）<em>上半脸分支</em>：融合音频与文本情感特征，预测微表情参数（眨眼概率、挑眉程度、视线方向），关键点热图注意力增强眼部细节；（6）<em>动态融合</em>：卷积网络基于 68 点关键点热图预测逐像素软融合权重，平滑合并上下半脸。</li>
-            <li data-en="<strong>Training Strategy &amp; Losses:</strong> Curriculum learning in four stages: freeze upper branch → train lips only; freeze lower branch → train eyes/brows only; unfreeze all for joint optimization; finally introduce adversarial training. Discriminators: 3D temporal PatchGAN (global temporal consistency) + eye-region local PatchGAN (eye detail realism). Loss terms: pixel L1, LPIPS perceptual loss, identity consistency, skin-tone loss, micro-expression smoothness, gaze coherence; a dynamic weight scheduler balances all terms throughout training.">
-              <strong>训练策略与损失：</strong>分阶段课程学习：冻结上半脸专训唇部 → 冻结下半脸专训眼眉 → 全部解冻整体优化 → 引入对抗训练。判别器：3D 时序 PatchGAN（整体时序一致性）+ 眼部局部 PatchGAN（眼部细节真实感）。损失体系涵盖像素 L1、LPIPS 感知损失、身份一致性、肤色损失、微表情平滑、视线连贯性等，并设计动态权重调度器平衡各分项。</li>
-            <li data-en="<strong>Limitations &amp; Outcome:</strong> The project did not reach the intended generation quality due to three constraints: (1) <em>Compute</em> — single consumer-grade GPU, batch size 1; the full training plan (1000 epochs including adversarial stage) could not be completed; training was halted at epoch 124; (2) <em>Data</em> — limited scale and uneven quality; landmark detection noise under profile views and occlusion degraded training stability for both branches; (3) <em>Complexity vs. trainability trade-off</em> — the multi-module design required more data and compute than available; greater model complexity raised the bar for training convergence rather than lowering it.">
-              <strong>局限与结果：</strong>项目最终未达预期生成质量，受三点制约：（1）<em>算力不足</em>——单卡消费级 GPU、批次大小仅为 1，完整训练计划（1000 epoch 含对抗阶段）无法跑完，实际训练至第 124 epoch 终止；（2）<em>数据有限</em>——规模小、质量参差，侧脸和遮挡场景下关键点检测噪声大，直接影响两路分支的训练稳定性；（3）<em>复杂度与可训练性的矛盾</em>——多子模块设计对数据量和训练充分性要求更高，在当前条件下反而带来训练困难。</li>
-            <li data-en="<strong>Takeaways:</strong> Completed the full cycle from design to implementation of a multimodal generation system; gained firsthand experience with audio-visual alignment, generative model training instability, and GPU memory optimization. Developed a clearer understanding of the technical boundaries of Wav2Lip-style approaches and the genuine difficulty of adding expression generation. Recognized that under resource constraints, model design requires more deliberate trade-offs between complexity and trainability.">
-              <strong>收获：</strong>完整走过多模态生成系统从设计到实现的全流程，对音视频对齐、生成模型训练不稳定性、显存优化等问题有了切身认识；对 Wav2Lip 等主流方案的技术边界有了更清晰的判断；认识到资源受限条件下模型设计需在复杂度与可训练性之间做更审慎的权衡。</li>
+            <li
+              data-en="<strong>Background:</strong> Wav2Lip is the dominant audio-driven talking-face synthesis solution, but its core limitation is that only lip movement is driven — the rest of the face (expressions, gaze, brows) remains completely static, making the output look mechanical and unconvincing. This project targets precisely this gap: while preserving audio-driven lip sync, it introduces expression generation so that a digital human's face exhibits natural emotional variation during speech. As development progressed, eye details (blink rhythm, gaze direction) and brow movement proved equally critical to perceived realism, prompting dedicated modeling of these regions.">
+              <strong>项目背景：</strong>Wav2Lip
+              是目前主流的音频驱动说话人脸生成方案，但其核心局限在于只能驱动嘴唇运动，面部其余区域（表情、眼神、眉毛等）完全静止，生成结果显得机械、缺乏真实感。本项目针对这一局限：在保留音频驱动唇形同步的基础上引入表情生成能力，使数字人面部在说话时能呈现自然的情感变化；随着开发推进，眼部细节（眨眼节律、眼神方向）和眉毛运动对真实感同样关键，因此逐步扩展了对这些区域的专项建模。
+            </li>
+            <li
+              data-en="<strong>Architecture — Decoupled Upper/Lower Face:</strong> The face generation task is decomposed into two independent branches — upper face (eyes, brows) and lower face (lips) — driven by different modality signals and merged via a learnable fusion mask. Key modules: (1) <em>Full-face encoder</em>: ResNet-18 backbone with gradient checkpointing extracts multi-scale visual features from the reference frame; (2) <em>Audio encoder</em>: three-stream parallel multi-scale Conv1d + BiLSTM models per-frame audio; (3) <em>Text emotion encoder</em>: DistilBERT extracts sentence-level affective features to drive expression; (4) <em>Lower-face branch</em>: audio-primary, temporal cross-attention with time-delay bias for audio-visual alignment, FiLM conditional modulation for lip animation; (5) <em>Upper-face branch</em>: fuses audio and text emotion features to predict micro-expression parameters (blink probability, brow raise, gaze direction) with landmark heatmap attention for eye detail enhancement; (6) <em>Dynamic fusion</em>: convolutional network predicts per-pixel soft weights from 68-point landmark heatmaps to smoothly merge both branches.">
+              <strong>架构——上下半脸解耦：</strong>将人脸生成分解为<em>上半脸（眼部/眉毛）</em>与<em>下半脸（嘴唇）</em>两条独立分支，分别由不同模态信号驱动，再通过可学习融合掩码合并。主要模块：（1）<em>全脸编码器</em>：ResNet-18
+              backbone + gradient checkpointing 提取参考帧多尺度视觉特征；（2）<em>音频编码器</em>：三路并行多尺度 Conv1d + 双向 LSTM
+              建模逐帧音频；（3）<em>文本情感编码器</em>：DistilBERT 提取句子级情感特征驱动表情；（4）<em>下半脸分支</em>：以音频为主驱动，带时延偏置的时序交叉注意力对齐音视频，FiLM
+              条件调制生成唇部动画；（5）<em>上半脸分支</em>：融合音频与文本情感特征，预测微表情参数（眨眼概率、挑眉程度、视线方向），关键点热图注意力增强眼部细节；（6）<em>动态融合</em>：卷积网络基于 68
+              点关键点热图预测逐像素软融合权重，平滑合并上下半脸。
+            </li>
+            <li
+              data-en="<strong>Training Strategy &amp; Losses:</strong> Curriculum learning in four stages: freeze upper branch → train lips only; freeze lower branch → train eyes/brows only; unfreeze all for joint optimization; finally introduce adversarial training. Discriminators: 3D temporal PatchGAN (global temporal consistency) + eye-region local PatchGAN (eye detail realism). Loss terms: pixel L1, LPIPS perceptual loss, identity consistency, skin-tone loss, micro-expression smoothness, gaze coherence; a dynamic weight scheduler balances all terms throughout training.">
+              <strong>训练策略与损失：</strong>分阶段课程学习：冻结上半脸专训唇部 → 冻结下半脸专训眼眉 → 全部解冻整体优化 → 引入对抗训练。判别器：3D 时序 PatchGAN（整体时序一致性）+
+              眼部局部 PatchGAN（眼部细节真实感）。损失体系涵盖像素 L1、LPIPS 感知损失、身份一致性、肤色损失、微表情平滑、视线连贯性等，并设计动态权重调度器平衡各分项。
+            </li>
+            <li
+              data-en="<strong>Limitations &amp; Outcome:</strong> The project did not reach the intended generation quality due to three constraints: (1) <em>Compute</em> — single consumer-grade GPU, batch size 1; the full training plan (1000 epochs including adversarial stage) could not be completed; training was halted at epoch 124; (2) <em>Data</em> — limited scale and uneven quality; landmark detection noise under profile views and occlusion degraded training stability for both branches; (3) <em>Complexity vs. trainability trade-off</em> — the multi-module design required more data and compute than available; greater model complexity raised the bar for training convergence rather than lowering it.">
+              <strong>局限与结果：</strong>项目最终未达预期生成质量，受三点制约：（1）<em>算力不足</em>——单卡消费级 GPU、批次大小仅为 1，完整训练计划（1000 epoch
+              含对抗阶段）无法跑完，实际训练至第 124 epoch
+              终止；（2）<em>数据有限</em>——规模小、质量参差，侧脸和遮挡场景下关键点检测噪声大，直接影响两路分支的训练稳定性；（3）<em>复杂度与可训练性的矛盾</em>——多子模块设计对数据量和训练充分性要求更高，在当前条件下反而带来训练困难。
+            </li>
+            <li
+              data-en="<strong>Takeaways:</strong> Completed the full cycle from design to implementation of a multimodal generation system; gained firsthand experience with audio-visual alignment, generative model training instability, and GPU memory optimization. Developed a clearer understanding of the technical boundaries of Wav2Lip-style approaches and the genuine difficulty of adding expression generation. Recognized that under resource constraints, model design requires more deliberate trade-offs between complexity and trainability.">
+              <strong>收获：</strong>完整走过多模态生成系统从设计到实现的全流程，对音视频对齐、生成模型训练不稳定性、显存优化等问题有了切身认识；对 Wav2Lip
+              等主流方案的技术边界有了更清晰的判断；认识到资源受限条件下模型设计需在复杂度与可训练性之间做更审慎的权衡。
+            </li>
           </ul>
-          <figure class="card-figure">
+          <!-- <figure class="card-figure">
             <img src="assets/research/数字人.png" alt="数字人面部生成系统效果图" loading="lazy"
               onerror="this.src='assets/avatar.jpg';this.classList.add('placeholder');">
             <figcaption data-en="Generation pipeline diagram">面部生成系统架构图
             </figcaption>
-          </figure>
+          </figure> -->
+          </div><!-- /.card-scroll-body -->
         </article>
 
       </div><!-- /.timeline -->
